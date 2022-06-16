@@ -1,0 +1,1 @@
+[Reference Link](https://www.django-rest-framework.org/api-guide/schemas/)
