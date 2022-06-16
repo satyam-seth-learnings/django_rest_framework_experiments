@@ -1,0 +1,1 @@
+[Reference Link](https://www.django-rest-framework.org/topics/documenting-your-api/#a-minimal-example-with-redoc/)
