@@ -1,0 +1,1 @@
+[Reference Link](https://github.com/stefanwille/openapi-generator-typescript-example)
