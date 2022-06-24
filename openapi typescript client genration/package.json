@@ -1,0 +1,18 @@
+{
+  "name": "openapi-typescript-client-genration",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc -p ./tsconfig.json",
+    "codegen": "openapi-generator-cli generate -i ./openapi-schema.yml -g typescript-fetch -o src/generated-sources/openapi --additional-properties=supportsES6=true,npmVersion=6.9.0,typescriptThreePlus=true"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^2.5.1",
+    "typescript": "^4.7.4"
+  }
+}
