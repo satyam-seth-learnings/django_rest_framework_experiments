@@ -49,7 +49,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const call_1 = __importDefault(require("./call"));
 window.onload = () => __awaiter(void 0, void 0, void 0, function* () {
     const students = yield (0, call_1.default)();
-    document.getElementById("students").innerText = students;
+    document.getElementById("students").innerText = JSON.stringify(students);
 });
 
 },{"./call":1}],3:[function(require,module,exports){

@@ -1,14 +1,14 @@
-import { Configuration, Student, StudentapiApi } from "../generated-sources/openapi";
+import { Configuration, Student, StudentapiApi } from "../client";
 
 const configuration = new Configuration({
-    basePath: 'http://127.0.0.1:8000/',
+    basePath: 'http://127.0.0.1:8000',
 });
 
 
 const studentApi = new StudentapiApi(configuration);
 
-async function printStudents(){
+window.onload = async () => {
     const students = await studentApi.listStudents();
     console.log(students);
-    // document.getElementById("students")!.innerText;
+    document.getElementById("students")!.innerText = JSON.stringify(students);
 }

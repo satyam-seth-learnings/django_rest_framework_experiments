@@ -8,13 +8,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const call_1 = __importDefault(require("./call"));
+const client_1 = require("../client");
+const configuration = new client_1.Configuration({
+    basePath: 'http://127.0.0.1:8000',
+});
+const studentApi = new client_1.StudentapiApi(configuration);
 window.onload = () => __awaiter(void 0, void 0, void 0, function* () {
-    const students = yield (0, call_1.default)();
+    const students = yield studentApi.listStudents();
+    console.log(students);
     document.getElementById("students").innerText = JSON.stringify(students);
 });
 //# sourceMappingURL=demo.js.map
