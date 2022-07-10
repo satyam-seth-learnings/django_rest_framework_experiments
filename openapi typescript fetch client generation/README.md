@@ -1,0 +1,1 @@
+[Reference Link](https://github.com/ajaishankar/openapi-typescript-fetch)

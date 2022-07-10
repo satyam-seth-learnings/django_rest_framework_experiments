@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "dist/js",
+    "target": "es6",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "rootDirs": ["src/"],
+    "listEmittedFiles": false,
+    "listFiles": false,
+    "noImplicitAny": true,
+    "removeComments": true,
+    "preserveConstEnums": false,
+    "declaration": true,
+    "strict": true,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "paths": {
+      "*": [
+          "node_modules/*"
+      ]
+    }
+  }
+}
