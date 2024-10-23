@@ -5,7 +5,7 @@
 - Create virtual env
 
     ```sh
-    python3 -m venv .venv
+    python -m venv .venv
     ```
 
 - Activate virtual env
@@ -21,11 +21,13 @@
     ```
 
 - Generate Open Api Schema File
-    ```bash
-    python3 manage.py generateschema --file '../../frontend/openapi-schema.yml'
+    
+    ```sh
+    python manage.py generateschema --file '../../frontend/openapi-schema.yml'
     ```
 
 - Run Backend Server
-    ```bash
-    python3 manage.py runserver
+    
+    ```sh
+    python manage.py runserver
     ```
