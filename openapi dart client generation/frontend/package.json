@@ -1,0 +1,14 @@
+{
+  "name": "openapi-dart-client-generation",
+  "version": "1.0.0",
+  "description": "[Reference Link](https://github.com/ajaishankar/openapi-typescript-fetch)",
+  "main": "index.js",
+  "scripts": {
+    "gen-client": "rm -rf ./client && openapi-generator-cli generate -g dart -i openapi-schema.yml -o client"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@openapitools/openapi-generator-cli": "2.5.2"
+  }
+}
