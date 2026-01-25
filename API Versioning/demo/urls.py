@@ -23,11 +23,11 @@ from django.views.generic import TemplateView
 router = DefaultRouter()
 
 # Register StudentModelViewSet With Router
-router.register('studentapi', views.StudentModelViewSet, basename='student')
+router.register('students', views.StudentModelViewSet, basename='students')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(router.urls)),
+    path('api/<str:version>/', include(router.urls)),
     # Use the `get_schema_view()` helper to add a `SchemaView` to project URLs.
     #   * `title` and `description` parameters are passed to `SchemaGenerator`.
     #   * Provide view name for use with `reverse()`.
