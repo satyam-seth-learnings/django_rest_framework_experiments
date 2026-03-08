@@ -8,6 +8,18 @@
   docker run --name django-redis -d -p 6379:6379 --rm redis
   ```
 
+- Access docker redis container terminal
+
+  ```sh
+  docker exec -it django-redis bash
+  ```
+
+- Check cache keys
+
+  ```
+  redis-cli -n 1 KEYS "*product_list*"
+  ```
+
 [Redis Py GitHub Link](https://github.com/redis/redis-py)
 
 [Django Redis GitHub Link](https://github.com/jazzband/django-redis)

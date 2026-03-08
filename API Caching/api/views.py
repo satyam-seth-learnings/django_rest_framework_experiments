@@ -11,37 +11,42 @@ from rest_framework.views import APIView
 
 from api.filters import InStockFilterBackend, OrderFilter, ProductFilter
 from api.models import Order, Product, User
-from api.serializers import (OrderCreateSerializer, OrderSerializer,
-                             ProductInfoSerializer, ProductSerializer,
-                             UserSerializer)
+from api.serializers import (
+    OrderCreateSerializer,
+    OrderSerializer,
+    ProductInfoSerializer,
+    ProductSerializer,
+    UserSerializer,
+)
 
 
 class ProductListCreateAPIView(generics.ListCreateAPIView):
-    queryset = Product.objects.order_by('pk')
+    queryset = Product.objects.order_by("pk")
     serializer_class = ProductSerializer
     filterset_class = ProductFilter
     filter_backends = [
         DjangoFilterBackend,
         filters.SearchFilter,
         filters.OrderingFilter,
-        InStockFilterBackend
+        InStockFilterBackend,
     ]
-    search_fields = ['=name', 'description']
-    ordering_fields = ['name', 'price', 'stock']
+    search_fields = ["=name", "description"]
+    ordering_fields = ["name", "price", "stock"]
     pagination_class = None
 
-    @method_decorator(cache_page(60 * 15, key_prefix='product_list'))
+    @method_decorator(cache_page(60 * 15, key_prefix="product_list"))
     def list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)
-    
+
     def get_queryset(self):
         import time
+
         time.sleep(2)
-        return super().get_queryset()    
-        
+        return super().get_queryset()
+
     def get_permissions(self):
         self.permission_classes = [AllowAny]
-        if self.request.method == 'POST':
+        if self.request.method == "POST":
             self.permission_classes = [IsAdminUser]
         return super().get_permissions()
 
@@ -49,17 +54,17 @@ class ProductListCreateAPIView(generics.ListCreateAPIView):
 class ProductDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    lookup_url_kwarg = 'product_id'
+    lookup_url_kwarg = "product_id"
 
     def get_permissions(self):
         self.permission_classes = [AllowAny]
-        if self.request.method in ['PUT', 'PATCH', 'DELETE']:
+        if self.request.method in ["PUT", "PATCH", "DELETE"]:
             self.permission_classes = [IsAdminUser]
-        return super().get_permissions()    
-    
+        return super().get_permissions()
+
 
 class OrderViewSet(viewsets.ModelViewSet):
-    queryset = Order.objects.prefetch_related('items__product')
+    queryset = Order.objects.prefetch_related("items__product")
     serializer_class = OrderSerializer
     permission_classes = [IsAuthenticated]
     pagination_class = None
@@ -71,7 +76,7 @@ class OrderViewSet(viewsets.ModelViewSet):
 
     def get_serializer_class(self):
         # can also check if POST: if self.request.method == 'POST'
-        if self.action == 'create' or self.action == 'update':
+        if self.action == "create" or self.action == "update":
             return OrderCreateSerializer
         return super().get_serializer_class()
 
@@ -80,7 +85,6 @@ class OrderViewSet(viewsets.ModelViewSet):
         if not self.request.user.is_staff:
             qs = qs.filter(user=self.request.user)
         return qs
-
 
 
 # class UserOrderListAPIView(generics.ListAPIView):
@@ -96,14 +100,16 @@ class OrderViewSet(viewsets.ModelViewSet):
 class ProductInfoAPIView(APIView):
     def get(self, request):
         products = Product.objects.all()
-        serializer = ProductInfoSerializer({
-            'products': products,
-            'count': len(products),
-            'max_price': products.aggregate(max_price=Max('price'))['max_price']
-        })
+        serializer = ProductInfoSerializer(
+            {
+                "products": products,
+                "count": len(products),
+                "max_price": products.aggregate(max_price=Max("price"))["max_price"],
+            }
+        )
         return Response(serializer.data)
-    
-    
+
+
 class UserListView(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer

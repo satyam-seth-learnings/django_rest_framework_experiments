@@ -10,6 +10,6 @@ def invalidate_product_cache(sender, instance, **kwargs):
     Invalidate product list caches when a product is created, updated, or deleted
     """
     print("Clearing product cache")
-    
+
     # Clear product list caches
-    cache.delete_pattern('*product_list*')
+    cache.delete_pattern("*product_list*")
